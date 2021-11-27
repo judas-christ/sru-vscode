@@ -1,0 +1,134 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "source.sru",
+  "patterns": [
+    { "include": "#blankett" },
+    { "include": "#blankett-fil" },
+    { "include": "#databeskrivning" },
+    { "include": "#medielev" },
+    { "include": "#kommentar" }
+  ],
+  "repository": {
+    "databeskrivning": {
+      "begin": "#DATABESKRIVNING_START",
+      "beginCaptures": { "0": { "name": "keyword.control" } },
+      "end": "#DATABESKRIVNING_SLUT",
+      "endCaptures": { "0": { "name": "keyword.control" } },
+      "patterns": [
+        { "include": "#produkt-sru" },
+        { "include": "#skapad" },
+        { "include": "#filnamn" },
+        { "include": "#kommentar" }
+      ]
+    },
+    "produkt-sru": {
+      "match": "(#PRODUKT)\\s+(SRU)",
+      "captures": {
+        "1": { "name": "keyword.other" },
+        "2": { "name": "constant.string" }
+      }
+    },
+    "skapad": {
+      "match": "(#SKAPAD)\\s+(\\d{8})\\s+(\\d{6})",
+      "captures": {
+        "1": { "name": "keyword.other" },
+        "2": { "name": "constant.numeric" },
+        "3": { "name": "constant.numeric" }
+      }
+    },
+    "filnamn": {
+      "match": "(#FILNAMN)\\s+(blanketter.sru)",
+      "captures": {
+        "1": { "name": "keyword.other" },
+        "2": { "name": "constant.string" }
+      }
+    },
+    "medielev": {
+      "begin": "#MEDIELEV_START",
+      "beginCaptures": { "0": { "name": "keyword.control" } },
+      "end": "#MEDIELEV_SLUT",
+      "endCaptures": { "0": { "name": "keyword.control" } },
+      "patterns": [
+        { "include": "#orgnr" },
+        { "include": "#namn" },
+        { "include": "#postnr" },
+        { "include": "#postort" },
+        { "include": "#kommentar" }
+      ]
+    },
+    "orgnr": {
+      "match": "(#ORGNR)\\s+(\\d{12})",
+      "captures": {
+        "1": { "name": "keyword.other" },
+        "2": { "name": "constant.numeric" }
+      }
+    },
+    "postnr": {
+      "match": "(#POSTNR)\\s+(\\d{5})",
+      "captures": {
+        "1": { "name": "keyword.other" },
+        "2": { "name": "constant.numeric" }
+      }
+    },
+    "postort": {
+      "match": "(#POSTORT)\\s+(.+)",
+      "captures": {
+        "1": { "name": "keyword.other" },
+        "2": { "name": "string" }
+      }
+    },
+
+    "blankett-fil": {
+      "match": "#FIL_SLUT",
+      "captures": { "0": { "name": "keyword.control" } }
+    },
+    "blankett": {
+      "begin": "^(#BLANKETT)\\s+(.+)$",
+      "beginCaptures": {
+        "1": { "name": "keyword.control" },
+        "2": { "name": "string" }
+      },
+      "end": "#BLANKETTSLUT$",
+      "endCaptures": { "0": { "name": "keyword.control" } },
+      "patterns": [
+        { "include": "#identitet" },
+        { "include": "#namn" },
+        { "include": "#uppgift" },
+        { "include": "#kommentar" }
+      ]
+    },
+    "identitet": {
+      "match": "(#IDENTITET)\\s+(\\d{12})\\s+(\\d{8})\\s+(\\d{6})",
+      "captures": {
+        "1": { "name": "keyword.other" },
+        "2": { "name": "constant.numeric" },
+        "3": { "name": "constant.numeric" },
+        "4": { "name": "constant.numeric" }
+      }
+    },
+    "uppgift": {
+      "match": "(#UPPGIFT)\\s+(\\d{4})\\s+(\\d+)",
+      "captures": {
+        "1": { "name": "keyword.other" },
+        "2": { "name": "variable" },
+        "3": { "name": "constant.numeric" }
+      }
+    },
+    "namn": {
+      "match": "(#NAMN)\\s+(.+)",
+      "captures": {
+        "1": { "name": "keyword.other" },
+        "2": { "name": "string" }
+      }
+    },
+    "kommentar": {
+      "patterns": [
+        {
+          "name": "comment.line",
+          "begin": ";",
+          "end": "$"
+        }
+      ]
+    }
+  }
+}

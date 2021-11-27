@@ -1,0 +1,36 @@
+{
+  "name": "sru-vscode",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": ">=0.9.0-pre.1"
+  },
+  "description": "Language support for the Swedish Tax Agency's (Skatteverket) SRU data files",
+  "publisher": "Daniel Hägglund <daniel.hagglund@gmail.com>",
+  "contributes": {
+    "languages": [
+      {
+        "id": "sru",
+        "aliases": [
+          "SRU"
+        ],
+        "extensions": [
+          ".sru"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "sru",
+        "scopeName": "source.sru",
+        "path": "./syntaxes/sru.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+      "test": "vscode-tmgrammar-test -c -s 'source.sru' -g './syntaxes/sru.tmLanguage.json' -t './test/*.sru'"
+  },
+  "devDependencies": {
+    "vscode-tmgrammar-test": "^0.0.11"
+  }
+}
