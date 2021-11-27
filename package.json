@@ -9,8 +9,8 @@
     "type": "git",
     "url": "https://github.com/judas-christ/sru-vscode.git"
   },
-  "publisher": "Daniel Hägglund <daniel.hagglund@gmail.com>",
-  "icon": "images/sru-icon.png",
+  "publisher": "DanielHagglund",
+  "icon": "images/sru-logo.png",
   "contributes": {
     "languages": [
       {
@@ -33,7 +33,11 @@
     ]
   },
   "scripts": {
-    "test": "vscode-tmgrammar-test -c -s 'source.sru' -g './syntaxes/sru.tmLanguage.json' -t './test/*.sru'"
+    "test": "vscode-tmgrammar-test -c -s 'source.sru' -g './syntaxes/sru.tmLanguage.json' -t './test/*.sru'",
+    "prepackage": "npm test",
+    "package": "vsce package",
+    "prepublish": "npm run package",
+    "publish": "vsce publish"
   },
   "devDependencies": {
     "vsce": "^2.5.0",
